@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<!-- saved from url=(0026)file:///G:/CRWG/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="Shortcut Icon" href="https://nos.netease.com/mail-online/48f5379be40da80374f97b7b57978a55/mail180x180.jpg?imageView&amp;thumbnail=100x100&amp;timestamp=1674223056443">
+    
+    <title>CRWG官方网站</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./stellar_files/css.css">
+    <link rel="stylesheet" href="./stellar_files/galaxy.css">
+    <link rel="stylesheet" href="./stellar_files/style.css">
+    <script src="./stellar_files/jquery.min.js"></script>
+<!--恒星模板-->
+<style>
+    /*光谱*/
+     .mstar{
+        color: rgb(255 187 120);
+        font-family: 'sans-serif';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 23px;
+    }.kstar{
+        color: rgb(255 215 166);
+        font-family: 'sans-serif';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 23px;
+    }.gstar{
+        color: rgb(255 235 215);
+        font-family: 'sans-serif';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 23px;
+    }.fstar{
+        color: rgb(237 239 255);
+        font-family: 'sans-serif';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 23px;
+    }.astar{
+        color: rgb(187 204 255);
+        font-family: 'sans-serif';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 23px;
+    }.bstar{
+        color: rgb(174 194 255);
+        font-family: 'sans-serif';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 23px;
+    }.ostar{
+        color: rgb(161 183 255);
+        font-family: 'sans-serif';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 23px;
+    }.wrstar{
+        color: rgb(113, 146, 255);
+        font-family: 'sans-serif';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 23px;
+    }.lstar{
+        color: rgb(255 35 0);
+        font-family: 'sans-serif';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 23px;
+    }.tstar{
+        color: rgb(200 0 0);
+        font-family: 'sans-serif';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 23px;
+    }
+
+    /*其他面板*/
+    .starbackcolor{
+        background-color:#f1f1f1;
+    }.stars-best {
+        color: rgb(100 120 255);
+        font-family: 'sans-serif';
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+    }.sky-stars .stars-listype {
+        background:linear-gradient(-3deg,#900000,#ff3300,
+#ffd39c,#eeefff,#a8c5ff,#9cbdff,#7799ff);
+        border-radius:5px;
+        border-style:solid;
+        border-width:2px;
+    }.lightlist {
+        border: 5px dotted rgb(255 185 105);
+        border-radius:10px; 
+        padding: 20px;
+        margin: 22px 0px;
+        font-style: normal;
+        font-weight: lighter;
+        font-size: 15px;
+        direction: ltr;
+        text-transform: none;
+        writing-mode: horizontal-tb;
+    }
+
+     /*特殊恒星样式*/
+    #flip
+	{
+		padding:5px;
+		text-align:center;
+		background-color:#e5eecc;
+		border:solid 1px #c3c3c3;
+	}
+    #panel
+	{
+        padding:5px;
+		background-color:#e5eecc;
+		border:solid 1px #c3c3c3;
+		padding:10px;
+		display:none;
+	}</style>
+    
+<style>
+        table {
+        border-spacing: 0
+    }
+        table th {
+            width:500px;
+            height:10px;
+            text-align:center;
+            padding:5px;
+            font-weight:lighter;
+        }
+        table .lightstar-list-btr {
+            font-weight:bold;
+    }.sky-stars {
+        padding:10px;
+        width:100%;
+        background:rgba(255,255,255,0.4);
+        border-radius:5px;
+    </style>
+    <!--恒星轨迹图-->
+<style>
+    .system {
+        display:flex;
+        width:100%;
+        height:500px;
+        justify-content:center;
+        align-items:center;
+        background-color:#000000;
+    }
+    .systemstar-a {
+        position:absolute;
+        left:60px;
+        width:40px;
+        height:40px;
+        border-radius:50%;
+        background-color:#c3d1ff;
+        box-shadow:0 0 10px #c3d1ff,
+            0 0 20px #c3d1ff,
+            0 0 30px #c3d1ff,
+            0 0 40px #c3d1ff;
+    }
+    .systemstar-b {
+        position:absolute;
+        left:-110px;
+        width:20px;
+        height:20px;
+        border-radius:50%;
+        background-color:#ffe6d2;
+        box-shadow:0 0 10px #ffe6d2,
+            0 0 20px #ffe6d2,
+            0 0 30px #ffe6d2,
+            0 0 40px #ffe6d2;
+    }
+    
+    .zhongxin {
+        position:absolute;
+        width:50px;
+        height:50px;
+        border-radius:50%;
+    }
+    
+    .zhongxin:hover {
+        animation:rotate 20s linear infinite;
+    }
+    
+    .zhongxin::before {
+        content:"";
+        width:120px;
+        height:120px;
+        position:absolute;
+        left:50%;
+        top:50%;
+        transform:translate(-50%,-50%);
+        border:1px solid #c3d1ff;
+        border-radius:50%;
+    }
+    
+    .zhongxin::after {
+        content:"";
+        width:250px;
+        height:250px;
+        position:absolute;
+        left:50%;
+        top:50%;
+        transform:translate(-50%,-50%);
+        border:1px solid #ffe6d2;
+        border-radius:50%;
+    }
+    
+    @keyframes rotate {
+        to{
+            transform:rotateZ(360deg);
+        }
+    }
+    
+    
+</style><!--搜索框-->
+
+<style>
+    .navbar form {
+        float:right;
+        padding:20px;
+    }
+    .autocomplete {
+      /*the container must be positioned relative:*/
+      position: relative;
+      display: inline-block;
+    }
+    .navbar input {
+      border: 1px solid transparent;
+      background-color: #f1f1f1;
+      padding: 10px;
+      font-size: 16px;
+    }
+    .navbar input[type=text] {
+      background-color:rgba(255,255,255,0.7);
+      border-radius:8px;
+      width:100%;
+    }
+    .navbar input[type=submit] {
+      background-color: DodgerBlue;
+      border-radius:8px;
+      color: #fff;
+    }
+    .autocomplete-items {
+      position: absolute;
+      border: 1px solid #d4d4d4;
+      border-bottom: none;
+      border-top: none;
+      z-index: 99;
+      /*position the autocomplete items to be the same width as the container:*/
+      top: 100%;
+      left: 0;
+      right: 0;
+    }
+    .autocomplete-items div {
+      padding: 10px;
+      cursor: pointer;
+      background-color: #fff; 
+      border-bottom: 1px solid #d4d4d4; 
+    }
+    .autocomplete-items div:hover {
+      /*when hovering an item:*/
+      background-color: #e9e9e9; 
+    }
+    .autocomplete-active {
+      /*when navigating through the items using the arrow keys:*/
+      background-color: DodgerBlue !important; 
+      color: #ffffff; 
+    }
+    @media screen and (max-width: 480px) {
+        .navbar input[type=submit] {
+            display:none;
+        }
+        .navbar input[type=text] {
+            width:100%;
+        }
+    }
+</style>
+<!--js-->
+<script>
+    $(document).ready(function(){
+			  $("#flip").click(function(){
+			    $("#panel").slideToggle("slow");
+			  });
+			});
+    
+                var k = 1
+                function fun() {
+                    switch (k) {
+                        case 1:
+                            document.getElementById("h").innerHTML = "点我干嘛！！";
+                            break;
+
+                        case 2:
+                            document.getElementById("h").innerHTML = "你再点一次！";
+                            break;
+
+                        case 3:
+                            document.getElementById("h").innerHTML = "你个老六！";
+                            break;
+
+                        case 4:
+                            document.getElementById("h").innerHTML = "真是服了！";
+                            say = "你都点了" + k + "次了！";
+                            alert(say);
+                            break;
+
+                        default:
+                            document.getElementById("h").innerHTML = "你再点！";
+                            alert("sb，都点了" + k + "次了")
+                            break;
+                    }
+                    k = k + 1
+                }
+
+            </script>
+
+    </head>
+<body style="">
+
+<div class="header">
+<center>
+    <h1 id="h" onclick="fun()" style="display:inline-block">CRWG官方网站</h1><img src="./stellar_files/logo-cat.png" width="150px" height="150px" style="float:right">
+    
+    </center>
+    
+
+</div>
+
+<div class="navbar"><div class="pindao">
+    <div class="channel-icons">
+        <a class="channel-icons__item" href="file:///G:/CRWG/item/dynamic.html" target="_blank">
+            <div class="icon-bg icon-bg__dynamic">
+                <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-bg--icon">
+                    <path d="M6.41659 15.625C3.88528 15.625 1.83325 13.7782 1.83325 11.5H10.9999C10.9999 13.7782 8.94789 15.625 6.41659 15.625Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M15.125 16.0827C15.125 18.614 13.2782 20.666 11 20.666L11 11.4993C13.2782 11.4993 15.125 13.5514 15.125 16.0827Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M6.875 6.91667C6.875 9.44797 8.72183 11.5 11 11.5L11 2.33333C8.72182 2.33333 6.875 4.38536 6.875 6.91667Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path d="M15.5833 7.375C13.052 7.375 11 9.22183 11 11.5H20.1667C20.1667 9.22183 18.1146 7.375 15.5833 7.375Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+            </div>
+            <!---->
+            <span>论坛</span>
+        </a>
+        <a href="file:///G:/CRWG/item/popular.html" target="_blank" class="channel-icons__item">
+            <div class="icon-bg icon-bg__popular">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-bg--icon">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M4.89054 17.272L4.89277 17.2742C6.49674 18.8782 8.66472 19.7888 10.9624 19.7888C13.2503 19.7888 15.2113 19.0539 16.6107 17.6108L16.6108 17.6108L16.6128 17.6086C18.0002 16.1345 18.7835 14.182 18.7421 12.1819C18.7852 11.3835 18.6916 9.36321 17.4088 6.75488L17.4082 6.7537C17.209 6.35523 16.8163 6.06598 16.3391 5.96993C15.8904 5.87103 15.4021 6.01997 15.061 6.35741C14.9094 6.48781 14.7796 6.61755 14.6655 6.7317L14.6637 6.73348L14.6329 6.76426C14.2107 3.35588 12.6083 1.7368 11.1654 1.00465C11.148 0.987812 11.1265 0.967972 11.1036 0.950782C11.0775 0.931205 11.0311 0.900467 10.9694 0.888912C10.2276 0.608301 9.41043 1.01168 9.1237 1.77629L9.12314 1.7778C8.50566 3.46558 7.35287 4.62281 6.16627 5.76704C4.51756 7.33121 2.75938 9.03623 2.80163 12.093C2.75906 14.055 3.54464 15.8826 4.89054 17.272ZM3.04999 13.0648C3.01092 12.7459 2.99439 12.4218 3.00168 12.0939C2.95933 9.12977 4.6531 7.47834 6.30453 5.9116C7.49017 4.76831 8.67581 3.58267 9.31098 1.84655C9.56504 1.16904 10.2849 0.830288 10.9201 1.08435C10.9624 1.08435 11.0048 1.1267 11.0471 1.16904C11.9267 1.60884 12.8853 2.39635 13.5753 3.77299C12.8853 2.39633 11.9267 1.6088 11.0471 1.16901C11.0047 1.12666 10.9624 1.08432 10.9201 1.08432C10.2849 0.830251 9.56503 1.16901 9.31097 1.84651C8.6758 3.58263 7.49016 4.76827 6.30452 5.91157C4.65309 7.47831 2.95932 9.12973 3.00166 12.0938C2.99438 12.4218 3.01092 12.7459 3.04999 13.0648ZM14.477 7.18189C14.477 7.1819 14.477 7.18192 14.477 7.18193C14.5828 7.09724 14.6887 6.99138 14.8052 6.87493C14.9216 6.75849 15.0486 6.63146 15.1968 6.50442C15.4932 6.20801 15.9167 6.08098 16.2978 6.16567C16.7212 6.25036 17.06 6.50443 17.2294 6.84318C17.3088 7.0046 17.3835 7.16371 17.4539 7.32035C17.3835 7.1637 17.3087 7.00458 17.2294 6.84314C17.06 6.50439 16.7212 6.25032 16.2978 6.16563C15.9167 6.08094 15.4932 6.20798 15.1968 6.50439C15.0486 6.63142 14.9216 6.75845 14.8051 6.87489L14.8051 6.8749C14.7557 6.92437 14.7081 6.97191 14.6617 7.01675C14.5988 7.07745 14.5379 7.13318 14.477 7.18189ZM12.6977 6.35925C12.8428 7.15476 12.8833 7.97963 12.8679 8.74864C12.8679 8.79032 12.8704 8.8315 12.8754 8.87195C12.8704 8.83151 12.8679 8.79035 12.8679 8.74867C12.8833 7.97966 12.8428 7.15478 12.6977 6.35925ZM16.7358 10.6654C16.8108 11.1478 16.8483 11.6393 16.8483 12.1362V12.1786C16.8483 13.703 16.2978 15.2274 15.2392 16.3283C14.0535 17.4293 12.5291 18.0221 10.9201 17.9374C9.1416 17.9374 7.44783 17.2175 6.21984 15.9472C5.82743 15.5548 5.50448 15.1119 5.25584 14.6331C5.50447 15.1119 5.82743 15.5548 6.21983 15.9472C7.44782 17.2175 9.14159 17.9373 10.9201 17.9373C12.5291 18.022 14.0535 17.4292 15.2392 16.3283C16.2978 15.2273 16.8483 13.7029 16.8483 12.1785V12.1362C16.8483 11.6393 16.8108 11.1478 16.7358 10.6654ZM10.9306 17.7376C12.4802 17.8192 13.9509 17.2497 15.0989 16.1856C16.1154 15.1261 16.6483 13.655 16.6483 12.1785V12.1362C16.6483 10.8624 16.3969 9.6266 15.8955 8.49474C15.2436 9.11663 14.7845 9.49093 14.4179 9.68717C14.2122 9.79725 14.0268 9.85633 13.846 9.86789C13.6644 9.8795 13.5028 9.84219 13.3473 9.78249C12.9207 9.62211 12.6679 9.20129 12.6679 8.74864V8.74464L12.6679 8.74464C12.6889 7.69735 12.6046 6.55594 12.2954 5.53554C12.01 4.59379 11.5372 3.76766 10.7904 3.20655C9.96581 4.94926 8.72521 6.18561 7.58695 7.28323L7.50836 7.35967C5.97191 8.85397 4.81321 9.98087 4.85306 12.1325L4.85313 12.1362H4.85309C4.85309 13.5239 5.38326 14.8277 6.36125 15.8057L6.36365 15.8081L6.36363 15.8082C7.55387 17.0394 9.19573 17.7374 10.9201 17.7374H10.9306L10.9306 17.7376Z" fill="#ffffff">
+                    </path>
+                </svg>
+            </div>
+        <span>热门</span>
+        </a>
+    <!---->
+    <a class="channel-icons__item" href="file:///G:/CRWG/item/channel.html" target="_blank">
+        <div class="icon-bg icon-bg__channel">
+            <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-bg--icon">
+                <circle cx="5.6875" cy="14" r="3.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                </circle><circle cx="10.5" cy="5.6875" r="3.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></circle><circle cx="15.3125" cy="14" r="3.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></circle>
+            </svg>
+        </div>
+        <!---->
+        <span class="icon-title">频道</span></a></div></div>
+
+
+<form autocomplete="off" action="file:///G:/CRWG/action_page.php">
+  <div class="autocomplete" style="width:300px;">
+    <input id="myInput" type="text" name="myStar" placeholder="搜索你的恒星">
+  </div>
+  <input type="submit"><script>
+    function autocomplete(inp, arr) {
+  /*函数主要有两个参数：文本框元素和自动补齐的完整数据*/
+  var currentFocus;
+  /* 监听 - 在写入时触发 */
+  inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      /*关闭已经打开的自动完成值列表*/
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /*创建列表*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*添加 DIV 元素*/
+      this.parentNode.appendChild(a);
+      /*循环数组...*/
+      for (i = 0; i < arr.length; i++) {
+        /*检查选项是否以与文本字段值相同的字母开头*/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*为匹配元素创建 DIV*/
+          b = document.createElement("DIV");
+          /*使匹配字母变粗体*/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+          b.addEventListener("click", function(e) {
+              /*insert the value for the autocomplete text field:*/
+              inp.value = this.getElementsByTagName("input")[0].value;
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
+  });
+  /*execute a function presses a key on the keyboard:*/
+  inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+  function addActive(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != inp) {
+        x[i].parentNode.removeChild(x[i]);
+      }
+    }
+  }
+  /*execute a function when someone clicks in the document:*/
+  document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+      });
+}
+
+/*数组*/
+var stars = ["Andromeda","Antlia","Apus","Aquarius","Aquila","Ara","Aries","Auriga","Bootes","Caelum",
+"Camelopardalis","Cancer","Canes Vematici","Canis Major","Canis Minor","Capricornus","Carina","Cassiopeia",
+"Centarus","Cetus","Chamaeleon","Circinus","Columba","Coma Berenices","Corona Australis","Corona Borealis",
+"Corvus","Crater","Crux","Cygnus","Delphinus","Dorado","Draco","Equuleus","Eridanus","Fornax","Gemini","Grux",
+"Hercules","Horologium","Hydra","Hydrus","Indus","Lacerta","Leo","Leo Minor","Lepus","Libra","Lupus","Lynx",
+"Lyra","Mensa","Microscopium","Monoceros","Musca","Norma","Octans","Ophiuchus","Orion","Pavp","Pegasus",
+"Perseus","Phoeix","Pictor","Pisces","Piscis Austrinus","Puppis","Pyxis","Reticulum","Sagitta","Sagittarius",
+"Scorpius","Sculptor","Scutum","Serpens","Sextans","Taurus","Telescopium","Triangulum","Triangulum Austale",
+"Tucana","Ursa Major","Ursa Minor","Vela","Virgo","Volans","Vulpecula"];
+
+var connames = ["andromedae", "antliae", "apodis", "aquarii", "aquilae", "arae", "aretis", "aurigae", 
+"bootis", "caeli", "camelopardalis", "cancri", "canum venaticorum", "canis majoris", "canis minoris", 
+"capricorni", "carinae", "cassiopeiae", "centauri", "cephei", "ceti", "chamaeleontis", "circini", "columbae", 
+"comae berenices", "coronae australis", "coronae borealis", "corvi", "crateris", "crucis", "cygnii",
+ "delphini", "doradus", "draconis", "equulei", "eridani", "fornacis", "geminorum", "gruis", "herculis", 
+ "horologii", "hydrae", "hydri", "indi", "lacertae", "leonis", "leonis minoris", "leporis", "librae", "lupi", 
+ "lyncis", "lyrae", "mensae", "microscopii", "monocerotis", "muscae", "normae", "octantiss", "ophiuchii", 
+ "orionis", "pavonis", "pegasi", "persei", "phoenicis", "pictoris", "piscium", "piscis austrini", "puppis",
+  "pyxidis", "reticuli", "sagittae", "sagittarii", "scorpii", "sculptoris", "scuti", "serpentis", "sextantis",
+   "tauri", "telescopii", "trianguli", "trianguli australis", "tucanae", "ursae majoris", "ursae minoris", 
+   "velorum", "virginis", "volantis", "vulpeculae"];
+
+var alpha = ["Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta", "Eta", "Theta", "Iota", "Kappa",
+ "Lambda", "Mu", "Nu", "Xi", "Omicron", "Pi", "Rho", "Sigma", "Tau", "Upsilon", "Phi", "Chi", 
+ "Psi", "Omega"];
+
+/*传递参数*/
+    autocomplete(document.getElementById("myInput"), stars);
+    </script>
+</form>
+</div>
+<div class="star-page">
+    <div class="row">
+      <div class="side">
+          <h2>恒星演化网站合集</h2>
+          <p>可供参考恒星甚至更多天体的演化</p>
+          <div style="height:50px;" class="fakeimg">
+        <a href="https://rainman.astro.illinois.edu/">rainman</a>
+    </div>
+    <br>
+    <div class="fakeimg" style="height:50px;">
+        <a href="http://albione.oa-teramo.inaf.it/">BaSTI</a>
+    </div>
+    <br>
+    <div class="fakeimg" style="height:50px;">
+        <a href="http://user.astro.wisc.edu/~townsend/static.php?ref=ez-web">EZWeb</a>
+    </div>
+    <br>
+    <div class="fakeimg" style="height:50px;">
+        <a href="http://user.astro.wisc.edu/~townsend/static.php?ref=mesa-web">MESAWeb</a>
+    </div>
+    <br>
+    <div class="fakeimg" style="height:50px;">
+        <a href="https://starinabox.lco.global/">盒子里的星星</a>
+
+    </div>
+    <br>
+<h2>恒星资料合集</h2>
+<div class="fakeimg" style="height:50px;">
+    <a href="https://www.universeguide.com/">UniverseGuide</a></div><br>
+
+<div class="fakeimg" style="height:50px;">
+    <a href="https://encyclopedia.thefreedictionary.com/">TheFreeDictionary</a></div><br>
+<div class="fakeimg" style="height:50px;">
+    <a href="http://simbad.u-strasbg.fr/simbad/">CDS</a>
+</div><br>
+<div class="fakeimg" style="height:50px;">
+    <a href="http://www.vendian.org/mncharity/dir3/blackbody/UnstableURLs/bbr_color.html">恒星黑体辐射颜色对照</a>
+</div>
+
+
+
+
+      </div>
+      <div class="main">
+    <div class="sky-stars">
+        <h2>恒星基本类型</h2>
+        <hr>
+        <h3>常见光谱</h3>
+        <div class="stars-listype">
+            <main class="star-layout">
+            <details title="M-star">
+                <summary class="mstar">M型恒星</summary>
+                <div class="starbackcolor">M-star
+            温度为2300-3800K。
+            宇宙众多恒星中，大约73%左右为M型主序星（即红矮星），离太阳最近的65颗恒星中也有50颗是红矮星。例如离太阳最近的恒星，半人马座的南门二C（即比邻星），便是一颗红矮星，其光谱分类为M5.5Ve，视星等仅为11.0。<br><br>演化方式：<br>0.2M以下<br>PostMS简并氦核达到勋-钱极限后，壳层对流仍然逐渐消退，没有发展趋势。需要注意的是，0.14M以上(即可在体积上膨胀)和0.14M以下没有本质区别。此类恒星的这个阶段统一叫做原氦白矮星，即Proto-HeWD。<br>
+            0.2-0.4M<br>PostMS简并氦核达到勋-钱极限后，壳层对流有发展趋势/发展，但在尚未深入至氢壳层源时即开始消退。此类恒星的这个阶段叫做红巨星支流散体，即RGB-manqué。<br>
+            0.4M以上<br>PostMS简并氦核达到勋-钱极限后，壳层对流发展，且在未离开林忠四郎线的渐近线时深入至氢壳层源，造成第一次掘取现象。此类恒星的这个阶段叫做红巨星支，即RGB。<br>
+            <img src="./stellar_files/M-hr.webp" width="200px" height="200px"><img src="./stellar_files/M-hr2.webp" width="220px" height="192px">
+            <br>其他种类：<br>特超巨星/超巨星/亮巨星/巨星/次巨星/次矮星等<br>比如参宿四（猎户座α），是一颗经典的红超巨星，它现在是一颗光谱为M2Ia的恒星。<br>此类恒星一般是由大质量恒星（小型O/大型B）演化而来。但这类M型超巨星（光谱后缀Ia+至Ib之间）一般会在数百万年内发生超新星，并留下恒星残骸（中子星/黑洞，具体以恒星质量为准，参宿四会形成中子星）<br><br>而小一些的（亮）巨星，一般是由中等质量恒星演化到末期的产物，此类恒星的质量不足以超新星，小一些的会变成碳-氧、氧-氖（具体以能否点燃碳核为准），相对较大的可能形成 氧-氖-镁白矮星。</div>
+                </details>
+        </main>
+
+            <main class="star-layout">
+            <details title="K-star">
+                <summary class="kstar">K型恒星</summary>
+                <div class="starbackcolor">K-star
+            温度为3800-5200K。比如天苑四（波江座ε，K型主序星，K4V）和弧矢九A(船尾座π A / π Pup A，K型超巨星，K3Ib）<br><br>演化方式：<br>此类恒星可以膨胀到红巨星分支（RGB），一些小质量K型恒星无法进行氦燃烧，会收缩成为氦白矮星。<br>较大的K型恒星在红巨星分支后可以点燃氦核，进入氦主序。氦燃烧阶段可以分为：<br> 1、裸氦星（用sd表示）<br>2、（蓝）水平分支星（有时候G和F也归类其中）<br>3、红团簇<br>少部分K型恒星可以进入AGB（渐近巨星分支）阶段，不过无法点燃TP-AGB。
+            <br>
+
+                    <br>其他种类：<br>特超巨星/超巨星/亮巨星/巨星/次巨星/次矮星等，以及碳星子类群：H/Hd/部分J<br></div>
+                    </details></main><main class="star-layout">
+
+            <details title="G-star">
+                <summary class="gstar">G型恒星</summary>
+                <div class="starbackcolor">G-star
+            温度为5200-6000K。我们的太阳就是一颗G型恒星，现阶段的光谱为G2V。<br><br>演化方式：<br>此类恒星的质量大于K型恒星，它们大部分可以进入TP-AGB，并形成碳氧白矮星。
+            <br>太阳的演化阶段：原恒星 —— 金牛T星 —— 主序前星 —— 氢燃烧 —— 晚期氢燃烧 —— 亚巨星（此类恒星的这个阶段不等同赫氏间隙） ——红巨星分支 —— （氦闪） —— 红团簇 —— E-AGB —— TP-AGB —— （原）行星状星云 —— 室女座GW型变星/极晚期热脉动 —— 白矮星 —— 黑矮星
+            <br><br>注：例如主序星、蓝巨星等属于“表示这一类型的恒星”，并不代表“恒星阶段”。<br><br>
+            <img src="./stellar_files/G-ras.gif" title="太阳晚期的演化轨迹">
+            <br>其他种类：<br>特超巨星/超巨星/亮巨星/巨星/次巨星/次矮星等，特殊情况也包括ZAMS为K型的恒星升温到G型（如天仓五，现在为G8V）<br></div>
+            </details></main><main class="star-layout">
+
+            <details title="F-star">
+                <summary class="fstar">F型恒星</summary>
+                <div class="starbackcolor">F-star
+            温度为6000-7500K。著名的F型恒星有南河三（晚期主序星）、北极星（勾陈一Aa，处于核心氦燃烧阶段）等<br>此类恒星在B站的某圈子里被认为是黄白色，实际上在黑体辐射中他们呈现纯白色，F0V到F3V甚至是淡淡的蓝色。
+        <br>演化方式：<br>
+        它们的质量比太阳略高，质量大于约1.2太阳质量的恒星的核心属于对流核，随着氢燃烧过程的进行中心对流核会逐渐缩小，氢燃烧区变大，当氢燃料小于约5%时，对流区会变得比氢燃烧区小，即垂直分支。当核心氢彻底耗尽时才会进入赫氏间隙阶段。
+        除垂直分支外，其他阶段和太阳基本类似，区别不算特别大。
+            <br>
+            <br>
+
+            <br>其他种类：<br>特超巨星（F型LBV按光度分算特超巨星）/超巨星/亮巨星/巨星/次巨星/次矮星等，部分的天琴座RR型变星（光谱一般为A到F之间，属于水平分支星的一种）<br></div>
+            </details></main><main class="star-layout">
+
+            <details title="A-star">
+                <summary class="astar">A型恒星</summary>
+                <div class="starbackcolor">A-star</div>
+            </details></main><main class="star-layout">
+
+            <details title="B-star">
+                <summary class="bstar">B型恒星</summary>
+                <div class="starbackcolor">B-star
+            </div>
+            </details></main>
+
+            <main class="star-layout">
+
+            <details title="O-star">
+                <summary class="ostar">O型恒星</summary>
+                <div class="starbackcolor">O-star
+                </div>
+                </details>
+                </main>
+              <main class="star-layout">
+
+            <details title="WR-star">
+                <summary class="wrstar">W型恒星</summary>
+                <div class="starbackcolor">WR-star
+                </div>
+                </details>
+                </main></div>
+    <br><h3>褐矮星/L型主序星</h3>
+    <div class="stars-listype">
+            <main class="star-layout">
+            <details title="L-Brown Dwarf">
+                <summary class="lstar">L型恒星/褐矮星</summary>
+                <div class="starbackcolor">L-star/L-Brown Dwarf</div>
+                </details>
+        </main>
+
+    <main class="star-layout">
+            <details title="T-Brown Dwarf">
+                <summary class="tstar">T型褐矮星</summary>
+                <div class="starbackcolor">T-Brown Dwarf</div>
+                </details>
+        </main>
+    </div><p><a style="color:red;">注意：</a>有部分人认为宇宙中存在Y型恒星，还有人甚至认为它能够产生氢核聚变，就以V（表示一般主序星）作为光谱后缀。<a style="color:red;">然而它们是非正式光谱。</a> </p>
+    </div><br>
+<div class="sky-stars">
+    <h2>特殊恒星</h2>
+    <hr>
+    <h3>金属线星</h3>
+    <h3>碳星</h3><p>碳星光谱类型：C<br>子类群：S、R、N、J、H、Hd</p>
+    <div style="background:linear-gradient(25deg,#900000,#ff3300,#ffd39c,#eeefff);
+border-radius:5px; border-style:solid; border-width:2px;">
+            <main class="star-layout">
+            <details title="R-star">
+                <summary style="color:#ffc994;font-family: &#39;sans-serif&#39;;font-style: normal;font-weight: normal;font-size: 23px;">R型碳星</summary>
+                <div class="starbackcolor">R-star</div>
+                </details>
+        </main>
+
+            <main class="star-layout">
+            <details title="N-star">
+                <summary style="color:#ffad5e;font-family: &#39;sans-serif&#39;;font-style: normal;font-weight: normal;font-size: 23px;">N型碳星</summary>
+                <div class="starbackcolor">N-star</div>
+                    </details></main><main class="star-layout">
+
+            <details title="J-star">
+                <summary style="color:#ffbb78;font-family: &#39;sans-serif&#39;;font-style: normal;font-weight: normal;font-size: 23px;">J型碳星</summary>
+                <div class="starbackcolor">J-star</div>
+            </details></main><main class="star-layout">
+
+            <details title="[H-star]">
+                <summary style="color:#ffd5ad;font-family: &#39;sans-serif&#39;;font-style: normal;font-weight: normal;font-size: 23px;">H型碳星</summary>
+                <div class="starbackcolor">H-star</div>
+            </details></main><main class="star-layout">
+            <details title="Hd-star">
+                <summary style="color:#ffce92;font-family: &#39;sans-serif&#39;;font-style: normal;font-weight: normal;font-size: 23px;">Hd型碳星</summary>
+                <div class="starbackcolor">Hd-star</div>
+            </details></main>
+
+
+              <main class="star-layout">
+
+            <details title="S-star">
+                <summary style="color:#ff8e21;font-family: &#39;sans-serif&#39;;font-style: normal;font-weight: normal;font-size: 23px;">S型碳星</summary>
+                <div class="starbackcolor">S-star</div>
+    </details></main>
+    </div>
+</div>
+
+		<br>
+<div class="sky-stars"><h3>非一般恒星类型</h3>
+    
+    <div class="stars-listype">
+        <main class="star-layout">
+        <details title="Nova/Supernova">
+            <summary class="fstar">新星/超新星</summary>
+            <div class="starbackcolor">Nova/Supernova</div>
+            </details>
+    </main>
+<main class="star-layout">
+        <details title="White Dwarf">
+            <summary class="ostar">白矮星</summary>
+            <div class="starbackcolor">White Dwarf</div>
+            </details>
+    </main>
+</div>
+</div>
+<h2>一些著名的部分恒星</h2>
+
+
+    <div class="lightlist">
+<details>
+    <summary class="stars-best">全天20亮星列表</summary>
+    <table border="1">
+    <tbody>
+    <tr class="lightstar-list-btr" bgcolor="#ffd5a1">
+        <th>名称</th>
+        <th>英文名</th>
+        <th>星座</th>
+        <th>半径</th>
+        <th>视星等</th>
+        <th>光谱</th><th>距离/光年</th>
+    </tr><tr bgcolor="#f1f1f1">
+        <th>天狼星</th>
+        <th>Sirius</th>
+        <th>大犬座</th>
+        <th>1.71太阳</th>
+        <th>-1.45</th>
+        <th>A0mA1Va</th>
+        <th>8.6</th>
+    </tr>
+    <tr bgcolor="#f1f1f1">
+        <th>老人星</th>
+        <th>Canopus</th>
+        <th>船底座</th>
+        <th>73.4太阳</th>
+        <th>-0.72</th>
+        <th>A9-F0 II-Ib</th>
+        <th>310</th>
+    </tr>
+    <tr bgcolor="#f1f1f1">
+        <th>南门二</th>
+        <th>Alpha Cen</th>
+        <th>半人马座</th>
+        <th>1.1太阳</th>
+        <th>-0.27</th>
+        <th>G2V</th>
+        <th>4.37</th>
+    </tr>
+    <tr bgcolor="#f1f1f1">
+        <th>大角</th>
+        <th>Arcturus</th>
+        <th>牧夫座</th>
+        <th>21太阳</th>
+        <th>-0.04</th>
+        <th>K2III</th>
+        <th>34</th>
+    </tr>
+    <tr bgcolor="#f1f1f1">
+        <th>织女星</th>
+        <th>Vega</th>
+        <th>天琴座</th>
+        <th>3.2太阳</th>
+        <th>0.03</th>
+        <th>A0Va</th>
+        <th>26.3</th>
+    </tr>
+    <tr bgcolor="#f1f1f1">
+        <th>五车二</th>
+        <th>Capella</th>
+        <th>大犬座</th>
+        <th>14太阳</th>
+        <th>0.08</th>
+        <th>G5III</th>
+        <th>43</th>
+    </tr>
+    <tr bgcolor="#f1f1f1">
+        <th>参宿七</th>
+        <th>Rigel</th>
+        <th>猎户座</th>
+        <th>74.8太阳</th>
+        <th>0.12</th>
+        <th>B8Ia</th>
+        <th>770</th>
+    </tr>
+    <tr bgcolor="#f1f1f1">
+        <th>南河三</th>
+        <th>Procyon</th>
+        <th>小犬座</th>
+        <th>2.04太阳</th>
+        <th>0.38</th>
+        <th>F5IV</th>
+        <th>11.4</th>
+    </tr>
+    <tr bgcolor="#f1f1f1">
+        <th>水委一</th>
+        <th>Achernar</th>
+        <th>波江座</th>
+        <th>8太阳</th>
+        <th>0.46</th>
+        <th>B6Vpe</th>
+        <th>130</th>
+    </tr>
+    <tr bgcolor="#f1f1f1">
+        <th>参宿四</th>
+        <th>Betelgeuse</th>
+        <th>猎户座</th>
+        <th>864太阳</th>
+        <th>0.07-1.3</th>
+        <th>M2Ia-Iab</th>
+        <th>642</th>
+    </tr><tr bgcolor="#f1f1f1">
+        <th>马腹一</th>
+        <th>Hardar</th>
+        <th>半人马座</th>
+        <th>13太阳</th>
+        <th>0.61-0.66</th>
+        <th>B1III</th>
+        <th>525</th>
+    </tr>
+    <tr bgcolor="#f1f1f1">
+        <th>牛郎星</th>
+        <th>Altair</th>
+        <th>天鹰座</th>
+        <th>1.6太阳</th>
+        <th>0.77</th>
+        <th>A7V</th>
+        <th>16</th>
+    </tr><tr bgcolor="#f1f1f1">
+        <th>毕宿五</th>
+        <th>Aldebaran</th>
+        <th>金牛座</th>
+        <th>44太阳</th>
+        <th>2.01太阳</th>
+        <th>K5III</th>
+        <th>65</th>
+    </tr><tr bgcolor="#f1f1f1">
+        <th>十字架二</th>
+        <th>Acrux</th>
+        <th>南十字座</th>
+        <th>14太阳</th>
+        <th>0.85</th>
+        <th>B0.5IV</th>
+        <th>320</th>
+    </tr><tr bgcolor="#f1f1f1">
+        <th>心宿二</th>
+        <th>Antares</th>
+        <th>天蝎座</th>
+        <th>680太阳</th>
+        <th>0.86</th>
+        <th>M1Iab</th>
+        <th>520</th>
+    </tr><tr bgcolor="#f1f1f1">
+        <th>角宿一</th>
+        <th>Spica</th>
+        <th>室女座</th>
+        <th>6.2太阳</th>
+        <th>0.98</th>
+        <th>B1III</th>
+        <th>260</th>
+    </tr><tr bgcolor="#f1f1f1">
+        <th>北河三</th>
+        <th>Pollux</th>
+        <th>双子座</th>
+        <th>9太阳</th>
+        <th>1.14</th>
+        <th>K0III</th>
+        <th>35</th>
+    </tr><tr bgcolor="#f1f1f1">
+        <th>北落师门</th>
+        <th>Fomalhout</th>
+        <th>南鱼座</th>
+        <th>1.2</th>
+        <th>1.16</th>
+        <th>A3V</th>
+        <th>22</th>
+    </tr><tr bgcolor="#f1f1f1">
+        <th>十字架三</th>
+        <th>Misoma</th>
+        <th>南十字座</th>
+        <th>13.5太阳</th>
+        <th>1.25</th>
+        <th>B1III</th>
+        <th>480</th>
+    </tr><tr bgcolor="#f1f1f1">
+        <th>天津四</th>
+        <th>Deneb</th>
+        <th>天鹅座</th>
+        <th>116太阳</th>
+        <th>1.16</th>
+        <th>A2Ia</th>
+        <th>1600</th>
+        </tr>
+        </tbody>
+    </table>
+        </details></div>
+<h2>多星系统</h2>
+    <p>如下是一个类似于北冕座α（A0V+G5V）的恒星系统</p>
+    <div>
+        <div id="flip">轨道运行图（点击展开）</div>
+        <div id="panel" style="display: none;">
+        <p>点击中间打开模拟动画效果</p>
+        <div class="system">
+            <div class="zhongxin">
+                <div class="systemstar-a"></div>
+                <div class="systemstar-b"></div>
+            </div>
+            </div>
+        </div>
+    </div></div>
+
+    </div>
+    </div>
+
+<div class="footer">
+    <p style="font-size:10px;">© CloudRain Working Group 2023版权所有</p>
+    
+    </div>
+
+
+</body></html>
