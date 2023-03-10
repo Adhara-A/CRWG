@@ -1,0 +1,186 @@
+/*对html的基本定义样式*/
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial;
+    margin: 0;
+    background-color:#f1f1f1;
+    overflow-x:hidden;
+}
+/*能看到的内容*/
+.background{
+    background-image:url("https://zubeneschamali.rth1.me/qcbk.jpg");
+    background-size:cover;
+    background-position:50% 50%;
+    width:100%;
+    font-size:1000%;
+    font-weight:650;
+    background-clip:text;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    position:relative;
+    text-align:center;
+    overflow:hidden;
+}.background::before{
+    content:'';
+    background-size:cover;
+    background-image:inherit;
+    background-position:50% 50%;
+    position:absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    z-index:-99;
+}h1{
+    position:absolute;
+    text-align:center;
+    width:100%;
+    letter-spacing:10px;
+    color:#fff;
+}
+/*基础声明*/
+a{
+    text-decoration:none;
+}
+p{
+    font-size:20px;
+}
+/*细节部分*/
+.crwg-header{
+    padding:40px;
+    background:linear-gradient(#ccccff,#8899ff);
+}
+.crwg-header h1 {
+    color:white;
+    font-size:60px;
+    padding:20px;
+    text-align: center;
+    margin:0;
+}.crwg-layout .row{
+    -ms-display:flex; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+}
+.crwg-layout .row .crwg-side{
+    -ms-flex: 30%; /* IE10 */
+    flex: 30%;
+    background-color:#ffe4c4;
+    padding: 20px;
+}
+.crwg-layout .row .crwg-side .sxl{
+    width: 100%;
+    text-align: center;
+    background: linear-gradient(25deg, rgb(119, 255, 119), rgb(119, 119, 255));
+    padding: 17px;
+    border-radius:30px;
+}
+.sxl a{
+    color:white;
+}
+.crwg-layout .row .crwg-main{
+    -ms-flex: 60%; /* IE10 */
+    flex: 60%;
+    background:linear-gradient(135deg, #8af1f8, #c779d0, #feac5e);
+    padding: 20px;
+}
+
+.crwg-layout .row .crwg-main .main-sxl {
+    background-color:rgba(255,255,255,0.3);
+    border-radius:5px;
+    padding:10px 20px;
+}
+/*响应式布局，在屏幕小于700像素时堆叠上下栏*/
+@media screen and (max-width:700px){
+    .crwg-layout .row {
+        flex-direction: column;
+    }
+}
+.web-table {
+    padding:5px 10px;
+    overflow:hidden;
+    width:100%;
+    background-color:rgba(0,0,0,0.5);
+    border-radius:20px;
+}
+.web-table a {
+    font-size:20px;
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+.web-table a:hover {
+    color:#aaddff
+}
+.web-table .web-right{
+    float:right;
+}
+@media screen and (max-width:400px){
+    .web-table a{
+        float: none;
+        width: 100%;
+    }
+}
+
+
+
+.navbar {
+    background-color: #b7d0ff;
+    height:100px;
+}
+
+ .channel-icons .icon-bg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: background .3s
+}
+
+.channel-icons .icon-bg__dynamic {
+    background: #ff9212
+}
+
+.channel-icons .icon-bg__dynamic:hover {
+    background: #ffb053
+}
+
+.channel-icons .icon-bg__popular {
+    background: #f07775
+}
+
+.channel-icons .icon-bg__popular:hover {
+    background: #f0aeac
+}
+
+.channel-icons .icon-bg__channel {
+    background: #59ca73
+}
+
+.channel-icons .icon-bg__channel:hover {
+    background: #7ad58f
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+.navbar .webs a:hover {
+    background-color: #333;
+    color: white;
+}
+
