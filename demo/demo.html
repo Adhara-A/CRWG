@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>bili登录 demo</title>
+	<link rel="stylesheet" href="./style.css">
+	<script src='./main.js' defer></script>
+</head>
+<body>
+	<div class='head-container'>
+		<div id='login-pending'>
+			<h5>正在加载...</h5>
+		</div>
+		<div id='not-login' hidden>
+			<h5>未登录。点击<a id='oauth-service'>验证您的哔哩哔哩账号</a>。</h5>
+		</div>
+		<div id='user-info' hidden>
+			<p>您当前登录身份：</p>
+			<img class='avatar' id='self-avatar' referrer="no-referrer">
+			<span id='self-name'></span>
+			<div class='bio' id='self-bio'></div>
+		</div>
+		<textarea id='edit-comment' placeholder='发一条友善的评论吧！'></textarea>
+		<button id='submit-comment' onclick='submitComment();' disabled>登录后即可提交</button>
+		<p id='comment-tip'>Tip: 提交之后可以删除，随便写点什么吧。</p>
+	</div>
+
+	<hr>
+
+	<template id='cmt-template'>
+		<div class='comment'>
+			<img id='avatar' class='avatar'>
+			<a id='nickname-link' class='nickname' target='_blank'><strong id='nickname'></strong></a>
+			<span class='bio' id='bio'></span>
+			<p id='context'></p>
+			<p id='time'></p>
+			<button id='del' hidden>删除</button>
+		</div>
+	</template>
+	<div id='comment-container'></div>
+
+	<div class='pagecount-display-container'>
+		<div>当前第<span id='page-count'>...</span>页（起始页为0，每页10条）</div>
+		<button onclick='incPage(-1)'>上一页</button>
+		<button onclick='incPage(1)'>下一页</button>
+	</div>
+</body>
+</html>
